@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apex Store - Gaming Shop</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+      color: #00ff99;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .product {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,255,153,0.1);
+    }
+    .product img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+    .product p {
+      color: #00ff99;
+      font-weight: bold;
+    }
+    footer {
+      background: #1f1f1f;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Apex Store</h1>
+    <p>Your Ultimate Gaming Item Shop 🎮</p>
+    </body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> - Cart</title>
+<style>
+body {
+    font-family: sans-serif;
+    background: #111;
+    color: #fff;
+    text-align: center;
+}
+.product {
+    background: #222;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 15px auto;
+    width: 90%;
+    max-width: 300px;
+}
+img {
+    width: 100%;
+    border-radius: 10px;
+}
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #0af;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background: #08c;
+}
+#cart {
+    margin: 20px;
+    padding: 10px;
+    background: #333;
+    border-radius: 10px;
+}
+</style>
+</head>
+<body>
+
+<h1>Gaming Store</h1>
+<div id="products"></div>
+
+<div id="cart">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p id="total">Total: ₹0</p>
+    <button onclick="checkout()">Pay via UPI</button>
+</div>
+
+<script>
+const products = [
+    {
+        id: "ITEM1",
+        title: "Free Fire Id",
+        description: "Fast-paced futuristic racing game.",
+        price: 49900,
+        image: "https://via.placeholder.com/300x200?text=Cyber+Racer"
+    },
+    {
+        id: "ITEM2",
+        title: "BGMI Id",
+        description: "Survive waves of zombies.",
+        price: 29900,
+        image: "https://via.placeholder.com/300x200?text=Zombie+Survival"
+    },
+    {
+        id: "ITEM3",
+        title: "REDEEM CODE",
+        description: "Shoot and survive in space.",
+        price: 19900,
+        image: "https://via.placeholder.com/300x200?text=Space+Shooter"
+    }
+];
+
+const cart = [];
+const productsContainer = document.getElementById('products');
+const cartItems = document.getElementById('cart-items');
+const total = document.getElementById('total');
+
+products.forEach(product => {
+    const div = document.createElement('div');
+    div.className = 'product';
+    div.innerHTML = `
+        <img src="${product.image}" alt="${product.title}" />
+        <h2>${product.title}</h2>
+        <p>${product.description}</p>
+        <p>Price: ₹${product.price / 100}</p>
+        <button onclick="addToCart('${product.id}')">Add to Cart</button>
+    `;
+    productsContainer.appendChild(div);
+});
+
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    cart.push(product);
+    renderCart();
+}
+
+function renderCart() {
+    cartItems.innerHTML = '';
+    let totalPrice = 0;
+    cart.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.title} - ₹${item.price / 100}`;
+        cartItems.appendChild(li);
+        totalPrice += item.price;
+    });
+    total.textContent = `Total: ₹${totalPrice / 100}`;
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    let totalPrice = cart.reduce((sum, item) => sum + item.price, 0) / 100;
+    const upiLink = `upi://pay?pa=apexstore34@ybl=Gaming%20Store&am=${totalPrice}&cu=INR&tn=Payment%20for%20Games`;
+    window.location.href = upiLink;
+}
+</script>
+
+</body>
+
+
+  <footer>
+    &copy; 2025 Apex Store. All rights reserved.
+  </footer>
